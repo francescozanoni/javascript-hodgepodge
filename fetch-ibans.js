@@ -12,19 +12,13 @@ var urls = [
   'https://ssl.ibanrechner.de/sample_accounts.html'
 ]
 
-var ibans = new Set()
-
-urls.forEach(url =>
-  fetch(url)
-    .then(res => res.text())
-    .then(body => {
-      var pattern = new RegExp('[A-Z]{2} ?[0-9]{2} ?[A-Z0-9 ]{4,}', 'g')
-      console.log(url)
-      var match
-      while ((match = pattern.exec(body)) !== null) {
-        var iban = match[0].replace(/\W/g, '')
-        ibans.add(iban)
-      }
-      console.log(ibans.size)
-    })
-)
+Promise.all(urls.map(url => fetch(url)))
+// Extract raw IBANs from HTML pages.
+  .then(responses => Promise.all(responses.map(response => response.text()))
+    .then(bodies => bodies.map(body => body.match(/[A-Z]{2} ?[0-9]{2} ?[A-Z0-9 ]{4,}/g)))
+  )
+  // Clean raw IBANs.
+  .then(ibanArrays => ibanArrays.map(ibanArray => ibanArray.map(iban => iban.replace(/\W/g, ''))))
+  // Merge all IBAN arrays.
+  .then(ibanArrays => new Set([].concat(...ibanArrays)))
+  .then(ibanSet => console.log(ibanSet.size))
