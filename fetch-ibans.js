@@ -1,19 +1,11 @@
+'use strict'
+
 const fetch = require('node-fetch')
 
-var urls = [
-  'https://www.citadele.lt/en/support/online-banking/examples/',
-  'https://it.iban.com/struttura',
-  'https://transferwise.com/gb/iban/example?all=true#structure_and_examples',
-  'https://bank.codes/iban/examples/',
-  'http://iban.co.uk/examples.html',
-  'https://www.danskebank.ie/en-ie/Personal/Day-to-day/Payments/helpfulInformation/Pages/What-is-IBAN-SWIFT-BIC.aspx',
-  'https://www.dnb.no/en/business/transaction-banking/international-payments/example-iban.html',
-  'https://www.hl.co.uk/investment-services/currency-service/ways-to-convert-currency/bank-transfer-information/iban-example',
-  'https://ssl.ibanrechner.de/sample_accounts.html'
-]
+const urls = require('./config/iban-urls')
 
 Promise.all(urls.map(url => fetch(url)))
-// Extract raw IBANs from HTML pages.
+// Extract raw IBANs from HTML pages: one IBAN array per page.
   .then(responses => Promise.all(responses.map(response => response.text()))
     .then(bodies => bodies.map(body => body.match(/[A-Z]{2} ?[0-9]{2} ?[A-Z0-9 ]{4,}/g)))
   )

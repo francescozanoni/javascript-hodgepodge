@@ -1,9 +1,4 @@
-# Dependency directories
 node_modules/
-
-# -------------------------------------------------------------------------------------------
-# Added manually
 .idea/
 yarn.lock
-coverage/
 package-lock.json
