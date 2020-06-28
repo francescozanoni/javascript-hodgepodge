@@ -2,20 +2,28 @@
 
 const fetch = require('node-fetch')
 
-const urls = require('./config/iban-urls')
 const ibanPattern = /[A-Z]{2} ?[0-9]{2} ?[A-Z0-9 ]{4,}/
 
-async function cleanIban(iban) {
-  return iban.toUpper().replace(/\W/g, '')
+async function cleanIban (iban) {
+  return iban.toUpperCase().replace(/[\W_]/g, '')
 }
 
-Promise.all(urls.map(url => fetch(url)))
-  .then(responses => Promise.all(responses.map(response => response.text()))
-  // Extract raw IBANs from HTML pages: one IBAN array per page.
-    .then(bodies => bodies.map(body => body.match(new RegExp(ibanPattern, 'g'))))
-  )
+/**
+ * @see https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+ */
+function onlyUnique (value, index, self) {
+  return self.indexOf(value) === index
+}
+
+module.exports = function (urls) {
+  return Promise.all(urls.map(url => fetch(url)))
+    .then(responses => Promise.all(responses.map(response => response.text()))
+    // Extract raw IBANs from HTML pages: one IBAN array per page.
+      .then(bodies => bodies.map(body => body.match(new RegExp(ibanPattern, 'g'))))
+    )
   // Clean raw IBANs within each array.
-  .then(ibanArrays => ibanArrays.map(ibanArray => ibanArray.map(iban => cleanIban(iban))))
-  // Merge all IBAN arrays.
-  .then(ibanArrays => new Set([].concat(...ibanArrays)))
-  .then(ibanSet => console.log(ibanSet.size))
+    .then(ibanArrays => ibanArrays.map(ibanArray => ibanArray.map(iban => cleanIban(iban))))
+  // Merge all IBAN arrays, keep only unique values and sort.
+    .then(ibanArrays => [].concat(...ibanArrays).filter(onlyUnique).sort())
+    .catch(error => console.error(error))
+}
