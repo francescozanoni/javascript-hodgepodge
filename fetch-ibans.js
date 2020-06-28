@@ -3,14 +3,19 @@
 const fetch = require('node-fetch')
 
 const urls = require('./config/iban-urls')
+const ibanPattern = /[A-Z]{2} ?[0-9]{2} ?[A-Z0-9 ]{4,}/
+
+async function cleanIban(iban) {
+  return iban.toUpper().replace(/\W/g, '')
+}
 
 Promise.all(urls.map(url => fetch(url)))
-// Extract raw IBANs from HTML pages: one IBAN array per page.
   .then(responses => Promise.all(responses.map(response => response.text()))
-    .then(bodies => bodies.map(body => body.match(/[A-Z]{2} ?[0-9]{2} ?[A-Z0-9 ]{4,}/g)))
+  // Extract raw IBANs from HTML pages: one IBAN array per page.
+    .then(bodies => bodies.map(body => body.match(new RegExp(ibanPattern, 'g'))))
   )
-  // Clean raw IBANs.
-  .then(ibanArrays => ibanArrays.map(ibanArray => ibanArray.map(iban => iban.replace(/\W/g, ''))))
+  // Clean raw IBANs within each array.
+  .then(ibanArrays => ibanArrays.map(ibanArray => ibanArray.map(iban => cleanIban(iban))))
   // Merge all IBAN arrays.
   .then(ibanArrays => new Set([].concat(...ibanArrays)))
   .then(ibanSet => console.log(ibanSet.size))
