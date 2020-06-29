@@ -8,8 +8,8 @@
         "standard"
     ],
     "parserOptions": {
-        "ecmaVersion": 11,
-        "sourceType": "module"
+        "ecmaVersion": 8,
+        "sourceType": "script"
     },
     "rules": {
     }
