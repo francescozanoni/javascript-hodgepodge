@@ -30,12 +30,12 @@ function isFooterValid (footer, questionNumbers) {
  * @returns {Array}
  */
 function validateOne (question) {
-  var output = []
-  var questionNumberSeparator = ''
-  var questionNumbers = []
-  var questionAsStringArray = question.split('\n')
-  for (var i = 0; i < questionAsStringArray.length; i++) {
-    var o = {}
+  const output = []
+  let questionNumberSeparator = ''
+  const questionNumbers = []
+  const questionAsStringArray = question.split('\n')
+  for (let i = 0; i < questionAsStringArray.length; i++) {
+    const o = {}
     o[questionAsStringArray[i]] = false
     output.push(o)
   }
@@ -50,10 +50,10 @@ function validateOne (question) {
   }
 
   // Question answers validation.
-  for (var j = 1; j < questionAsStringArray.length - 1; j++) {
-    var answer = questionAsStringArray[j]
-    var answerNumber = answer.substr(0, 1)
-    var answerNumberSeparator = answer.substr(1, 1)
+  for (let j = 1; j < questionAsStringArray.length - 1; j++) {
+    const answer = questionAsStringArray[j]
+    const answerNumber = answer.substr(0, 1)
+    const answerNumberSeparator = answer.substr(1, 1)
     // Answer generic validation.
     if (/^[A-Z](.|\)) .+/.test(answer) === true) {
       output[j][answer] = true

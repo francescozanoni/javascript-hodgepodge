@@ -1,9 +1,9 @@
 'use strict'
 
-const events = require("events");
+const events = require('events')
 
-const emitter = new events.EventEmitter();
+const emitter = new events.EventEmitter()
 
-console.log("EMITTER INSTANTIATED");
+console.log('EMITTER INSTANTIATED')
 
-module.exports = emitter;
+module.exports = emitter
