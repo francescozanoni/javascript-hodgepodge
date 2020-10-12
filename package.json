@@ -1,6 +1,6 @@
 {
   "name": "javascript-hodgepodge",
-  "description": "Extract standard JSON schemas from OpenAPI definitions",
+  "description": "My JavaScript hodgepodge",
   "version": "1.0.0",
   "main": "index.js",
   "repository": {
@@ -10,14 +10,18 @@
   "author": "Francesco Zanoni <francescozanoni81@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "eslint": "5",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
+    "eslint": "^5",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
-  }
+    "eslint-plugin-standard": "^4.0.1",
+    "jest": "^26.5.3"
+  },
+  "scripts": {
+	      "test": "jest"
+	        }
 }

@@ -7,3 +7,9 @@
 Notes:
 
  * in order to avoid warning `TypeError: this.cliEngine is not a constructor`, I've switched to [ESLint](https://eslint.org) 5
+
+Installation:
+docker run -v ${PWD}:/root/code -w /root/code --rm node:alpine yarn install
+
+Test:
+docker run -v ${PWD}:/root/code -w /root/code --rm node:alpine yarn test
