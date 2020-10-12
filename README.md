@@ -13,3 +13,6 @@ docker run -v ${PWD}:/root/code -w /root/code --rm node:alpine yarn install
 
 Test:
 docker run -v ${PWD}:/root/code -w /root/code --rm node:alpine yarn test
+
+Lint code:
+docker run -v ${PWD}:/root/code -w /root/code --rm node:alpine ./node_modules/.bin/eslint . --fix
