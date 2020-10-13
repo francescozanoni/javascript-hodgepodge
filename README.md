@@ -10,10 +10,13 @@ Notes:
  * test files are suffixed by `.test.js`, in order to comply with Jest default, so no further parameter is required
 
 Installation:
-docker run -v ${PWD}:/root/code -w /root/code --rm node:alpine yarn install
+
+    docker run -v ${PWD}:/code -w /code --rm node:alpine yarn install
 
 Test:
-docker run -v ${PWD}:/root/code -w /root/code --rm node:alpine yarn test
+
+    docker run -v ${PWD}:/code -w /code --rm node:alpine yarn test
 
 Lint code:
-docker run -v ${PWD}:/root/code -w /root/code --rm node:alpine ./node_modules/.bin/eslint . --fix
+
+    docker run -v ${PWD}:/code -w /code --rm node:alpine yarn lint
