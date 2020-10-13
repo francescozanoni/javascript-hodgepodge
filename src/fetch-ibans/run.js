@@ -1,16 +1,18 @@
 'use strict'
 
 const fetch = require('node-fetch')
-const utils = require('./utils')
+
+const utils = require('../utils')
+const urls = require('./iban-urls.json')
 
 const ibanPattern = /[A-Z]{2} ?[0-9]{2} ?[A-Z0-9 ]{4,}/
 
 /**
- * @param {Array<string>} urls
+ * @param {array<string>} urls
  *
- * @returns {Promise<Array<string>>}
+ * @returns {Promise<array<string>>}
  */
-module.exports = function (urls) {
+function fetchIbans (urls) {
   return Promise.all(urls.map(url => fetch(url)))
     .then(responses => Promise.all(responses.map(response => response.text()))
       // Extract raw IBANs from HTML pages: one IBAN array per page.
@@ -22,3 +24,9 @@ module.exports = function (urls) {
     .then(ibanArrays => [].concat(...ibanArrays).filter(utils.onlyUnique).sort())
     .catch(error => console.error(error))
 }
+
+(async function () {
+  fetchIbans(urls)
+    .then(ibans => console.log(ibans))
+    .catch(error => console.error(error))
+})()

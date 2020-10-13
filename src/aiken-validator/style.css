@@ -1,0 +1,19 @@
+.container {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 2em;
+}
+
+#input, #output {
+    font-family: monospace;
+    width: 30em;
+    height: 20em;
+    padding: 1em;
+    margin: 0;
+}
+
+div pre {
+    font-family: monospace;
+    display: block;
+    margin: 0;
+}

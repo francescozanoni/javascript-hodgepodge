@@ -1,6 +1,10 @@
 'use strict'
 
 /**
+ * Server-side version.
+ */
+
+/**
  * Question header (actual question) validation.
  *
  * @param {string} header
