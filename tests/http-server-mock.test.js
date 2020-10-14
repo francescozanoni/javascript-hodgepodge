@@ -1,16 +1,16 @@
+const fetch = require('node-fetch')
+const nock = require('nock')
 
+test('Mock HTTP server', async () => {
+  // Mock HTTP server
+  nock('http://hostname')
+    .get('/path')
+    .reply(200, 'text to return')
 
-  test('', async () => {
-  
-    // Mock HTTP server
-    const fileToServe = fs.readFileSync('/path/to/file').toString()
-    
-    nock('http://hostname')
-      .get('/server/path/to/file')
-      .reply(200, fileToServe)
+  // Request to HTTP server
+  const response = await fetch('http://hostname/path')
+  const body = await response.text()
 
-    await expect(SchemExtractor.fromUrl(schemaFilePath))
-      .rejects
-      .toStrictEqual(Error('Invalid input schema: no model schemas found'))
-  })
+  expect(response.status).toBe(200)
+  expect(body).toBe('text to return')
 })
