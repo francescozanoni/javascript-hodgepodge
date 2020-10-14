@@ -2,7 +2,7 @@
 
 Several experiments with JavaScript:
 
- * `src/fetch-ibans`: fetch many sample IBANs from several websites, in parallel
+ * `src/fetch-ibans`: fetch many sample IBANs from several websites, in parallel with [node-fetch](https://www.npmjs.com/package/node-fetch) package
  * `src/aiken-validator`: validate questions in [Aiken](https://docs.moodle.org/38/en/Aiken_format) format (used by [Moodle](https://docs.moodle.org) LMS)
  * `src/events`: NodeJS [event](https://nodejs.org/api/events.html) emitter and listener
  * `tests/node-fetch.test.js`: HTTP request/response test with [node-fetch](https://www.npmjs.com/package/node-fetch) package
@@ -10,19 +10,31 @@ Several experiments with JavaScript:
 
 #### Notes
 
- * in order to avoid warning `TypeError: this.cliEngine is not a constructor`, I've switched to [ESLint](https://eslint.org) 5
- * test files are suffixed by `.test.js`, in order to comply with Jest default, so no further parameter is required
+ * in order to avoid warning `TypeError: this.cliEngine is not a constructor` within IDE, I've switched to [ESLint](https://eslint.org) 5
+ * test files are suffixed by `.test.js`, in order to comply with [Jest](https://jestjs.io) default, so no further parameter is required
 
 ----
 
 ### Installation
 
-    docker run -v ${PWD}:/code -w /code --rm node:alpine yarn install
+    docker run -v ${PWD}:/code \
+               -w /code \
+               --rm \
+               node:alpine \
+               yarn install
 
-### Tests
+### Test
 
-    docker run -v ${PWD}:/code -w /code --rm node:alpine yarn test
+    docker run -v ${PWD}:/code \
+               -w /code \
+               --rm \
+               node:alpine \
+               yarn test
 
 ### Code linting
 
-    docker run -v ${PWD}:/code -w /code --rm node:alpine yarn lint
+    docker run -v ${PWD}:/code \
+               -w /code \
+               --rm \
+               node:alpine \
+               yarn lint
