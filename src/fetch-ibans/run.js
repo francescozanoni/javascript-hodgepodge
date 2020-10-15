@@ -8,12 +8,14 @@ const urls = require('./iban-urls.json')
 const ibanPattern = /[A-Z]{2} ?[0-9]{2} ?[A-Z0-9 ]{4,}/
 
 /**
- * @param {array<string>} urls
+ * @param {array<string>} urls URLs of web pages containing IBANs
  *
  * @returns {Promise<array<string>>}
  */
 function fetchIbans (urls) {
+  // Download all HTML pages.
   return Promise.all(urls.map(url => fetch(url)))
+  // Extract HTML from HTML pages.
     .then(responses => Promise.all(responses.map(response => response.text()))
       // Extract raw IBANs from HTML pages: one IBAN array per page.
       .then(bodies => bodies.map(body => body.match(new RegExp(ibanPattern, 'g'))))

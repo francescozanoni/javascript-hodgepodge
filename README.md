@@ -23,7 +23,9 @@ Several basic examples and experiments with JavaScript.
  * in order to avoid warning `TypeError: this.cliEngine is not a constructor` within IDE, I've switched to [ESLint](https://eslint.org) 5
  * test files are suffixed by `.test.js`, in order to comply with [Jest](https://jestjs.io) default, so no further parameter is required
 
+
 ----
+
 
 ### Installation
 
@@ -33,6 +35,7 @@ Several basic examples and experiments with JavaScript.
                node:alpine \
                yarn install
 
+
 ### Test
 
     docker run -v ${PWD}:/code \
@@ -40,6 +43,7 @@ Several basic examples and experiments with JavaScript.
                --rm \
                node:alpine \
                yarn test
+
 
 ### Code linting
 
