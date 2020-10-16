@@ -10,6 +10,7 @@ Several basic examples and experiments with JavaScript.
  * `src/events`: NodeJS [event](https://nodejs.org/api/events.html) emitter and listener
  * `tests/node-fetch.test.js`: HTTP request/response test with [node-fetch](https://www.npmjs.com/package/node-fetch) package
  * `tests/http-server-mock.test.js`: test client functionalities by mocking an HTTP server with [nock](https://github.com/nock/nock) package
+ * `tests/error-within-async.test.js`: how to ensure unexpected errors raised within asynchronous code do not jeopardize tests performed by [Jest](https://jestjs.io) framework
  * `.eslintrc.json`: configuration for [ESLint](https://eslint.org) package
 
 
