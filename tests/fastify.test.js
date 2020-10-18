@@ -1,8 +1,8 @@
 const fastify = require('fastify')
 
-function build (opts = {}) {
+function buildApp (opts = {}) {
   const app = fastify(opts)
-  app.get('/', async function (request, reply) {
+  app.get('/', async (request, reply) => {
     return { hello: 'world' }
   })
 
@@ -10,15 +10,18 @@ function build (opts = {}) {
 }
 
 test('Fastify HTTP server', async () => {
-  const app = build()
-
-  const response = await app.inject({
+  const app = buildApp()
+  const request = {
     method: 'GET',
     url: '/'
-  })
+  }
+
+  const response = await app.inject(request)
 
   expect(response.statusCode)
-    .strictEqual(200)
+    .toStrictEqual(200)
+  expect(response.body)
+    .toStrictEqual('{"hello":"world"}')
 })
 
-// Reference: https://www.fastify.io/docs/latest/Testing/#testing-with-a-running-server
+// Reference: https://www.fastify.io/docs/latest/Testing
