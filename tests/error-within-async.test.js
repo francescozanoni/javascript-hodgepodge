@@ -108,3 +108,44 @@ test('This fails, as expected', () => {
     .catch(e => 1)
 });
 */
+
+/*
+(node:1) UnhandledPromiseRejectionWarning: Error: expect(received).resolves.toBe()
+
+Received promise rejected instead of resolved
+Rejected to value: [Error: ERROR]
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 3)
+(node:1) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+FAIL tests/error-within-async.test.js
+  ✕ This fails, as expected, with warning (7 ms)
+
+  ● This fails, as expected, with warning
+
+    expect.assertions(1)
+
+    Expected one assertion to be called but received zero assertion calls.
+
+      111 | 
+      112 | test('This fails, as expected', () => {
+    > 113 |   expect.assertions(1)
+          |          ^
+      114 |   expect(f())
+      115 |     .resolves
+      116 |     .toBe(true)
+
+      at Object.<anonymous> (tests/error-within-async.test.js:113:10)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   0 total
+Time:        2.476 s
+Ran all test suites matching /tests\/error-within-async.test.js/i.
+
+test('This fails, as expected, with warning', () => {
+  expect.assertions(1)
+  expect(f())
+    .resolves
+    .toBe(true)
+});
+*/
