@@ -1,33 +1,27 @@
 const fastify = require('fastify')
 const fetch = require('node-fetch')
 
-/*
-https://jestjs.io/docs/en/setup-teardown
-Reference: https://www.fastify.io/docs/latest/Testing
-*/
+let app
 
-function buildApp (opts = {}) {
-  const app = fastify(opts)
+beforeEach(() => {
+  app = fastify()
   app.get('/', async (request, reply) => {
     return { hello: 'world' }
   })
-
-  return app
-}
-
-let app
-
-beforeEach(() => { app = buildApp() })
-afterEach(() => app.close())
+})
+afterEach(async () => {
+  await app.close()
+  app = undefined
+})
 
 describe('Testing Fastify', () => {
   test('With HTTP injection', async () => {
-    const request = {
+    expect.hasAssertions()
+
+    const response = await app.inject({
       method: 'GET',
       url: '/'
-    }
-
-    const response = await app.inject(request)
+    })
 
     expect(response.statusCode)
       .toStrictEqual(200)
@@ -35,11 +29,14 @@ describe('Testing Fastify', () => {
       .toStrictEqual('{"hello":"world"}')
   })
 
-  test('With running server', async () => {
+  // "done" parameter is required, because test is performed inside a callback function
+  test('With running server', (done) => {
+    expect.hasAssertions()
     app.listen(3000, async (error) => {
       if (error) {
         return
       }
+
       const response = await fetch('http://localhost:3000')
       const body = await response.text()
 
@@ -47,6 +44,15 @@ describe('Testing Fastify', () => {
         .toStrictEqual(200)
       expect(body)
         .toStrictEqual('{"hello":"world"}')
+      done()
     })
   })
 })
+
+/*
+References:
+ - https://www.fastify.io/docs/latest/Testing
+ - https://jestjs.io/docs/en/setup-teardown
+ - https://stackoverflow.com/questions/60399676/fastify-jest-running-processes-after-calling-close-on-fastify-instance
+ - https://jestjs.io/docs/en/asynchronous
+*/
