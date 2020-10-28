@@ -1,8 +1,8 @@
 'use strict'
 
-const MyClass = require('../src/objects/MyClass')
+const MyClass = require('../src/classes/MyClass')
 
-describe('Objects', () => {
+describe('Classes', () => {
   test('Instantiation', () => {
     const o1 = new MyClass('o1')
 
@@ -13,11 +13,13 @@ describe('Objects', () => {
   test('Set private and public attributes', () => {
     const o1 = new MyClass('o1')
 
-    o1.setPrivateAttribute(3)
+    o1.setPrivateAttribute(5)
     o1.publicAttribute = 3
 
-    expect(o1.toString())
-      .toBe('Name: o1 - Private attr.: 3 - Public attr.: 3 - Prototype attr.: 99 - Static attr.: 99')
+    expect(o1.getPrivateAttribute())
+      .toBe(5)
+    expect(o1.publicAttribute)
+      .toBe(3)
   })
 
   test('Get private and public attributes', () => {
@@ -27,9 +29,20 @@ describe('Objects', () => {
       .toBe(1)
     expect(o1.publicAttribute)
       .toBe(2)
+  })
+
+  test('Cannot get private attributes directly', () => {
+    const o1 = new MyClass('o1')
 
     expect(o1.privateAttribute)
       .toBe(undefined)
+  })
+
+  test('Cannot set private attributes directly', () => {
+    const o1 = new MyClass('o1')
+
+    expect(() => { o1.privateAttribute = 5 })
+      .toThrow(TypeError('Cannot add property privateAttribute, object is not extensible'))
   })
 
   test('Set private and public attributes of sibling objects', () => {
