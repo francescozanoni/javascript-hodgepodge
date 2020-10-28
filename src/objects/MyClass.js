@@ -28,11 +28,13 @@ const MyClass = function (inputName) {
     output += ' - '
     output += `Public attr.: ${this.publicAttribute}`
     output += ' - '
-    output += `Prototype attr.: ${this.protectedAttribute}`
+    output += `Prototype attr.: ${MyClass.prototype.protectedAttribute}`
     output += ' - '
     output += `Static attr.: ${MyClass.staticAttribute}`
     return output
   }
+
+  Object.seal(this)
 }
 
 module.exports = MyClass

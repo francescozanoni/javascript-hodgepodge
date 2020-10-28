@@ -8,21 +8,22 @@ const o2 = new MyClass('o2')
 console.log(o1.toString())
 console.log(o2.toString())
 
-console.table([[o1.getPrivateAttribute(), o1.publicAttribute, o1.protectedAttribute]])
+console.table([[o1.getPrivateAttribute(), o1.publicAttribute]])
 o1.setPrivateAttribute(3)
 o1.publicAttribute = 3
-console.table([[o1.getPrivateAttribute(), o1.publicAttribute, o1.protectedAttribute]])
+console.table([[o1.getPrivateAttribute(), o1.publicAttribute]])
 
-console.table([[o2.getPrivateAttribute(), o2.publicAttribute, o2.protectedAttribute]])
+console.table([[o2.getPrivateAttribute(), o2.publicAttribute]])
 o2.setPrivateAttribute(4)
 o2.publicAttribute = 4
-console.table([[o2.getPrivateAttribute(), o2.publicAttribute, o2.protectedAttribute]])
+console.table([[o2.getPrivateAttribute(), o2.publicAttribute]])
 
 console.log(o1.toString())
 console.log(o2.toString())
 
-o1.protectedAttribute = 100
-o2.protectedAttribute = 101
+// https://stackoverflow.com/questions/7662147/how-to-access-object-prototype-in-javascript
+Object.getPrototypeOf(o1).protectedAttribute = 100
+Object.getPrototypeOf(o2).protectedAttribute = 101
 
 MyClass.staticAttribute = 102
 
@@ -54,6 +55,6 @@ Name: o2 - Private attr.: 1 - Public attr.: 2 - Prototype attr.: 99 - Static att
 └─────────┴───┴───┴────┘
 Name: o1 - Private attr.: 3 - Public attr.: 3 - Prototype attr.: 99 - Static attr.: 99
 Name: o2 - Private attr.: 4 - Public attr.: 4 - Prototype attr.: 99 - Static attr.: 99
-Name: o1 - Private attr.: 3 - Public attr.: 3 - Prototype attr.: 100 - Static attr.: 102
+Name: o1 - Private attr.: 3 - Public attr.: 3 - Prototype attr.: 101 - Static attr.: 102
 Name: o2 - Private attr.: 4 - Public attr.: 4 - Prototype attr.: 101 - Static attr.: 102
  */
