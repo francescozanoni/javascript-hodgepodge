@@ -22,8 +22,8 @@ console.log(o1.toString())
 console.log(o2.toString())
 
 // https://stackoverflow.com/questions/7662147/how-to-access-object-prototype-in-javascript
-Object.getPrototypeOf(o1).protectedAttribute = 100
-Object.getPrototypeOf(o2).protectedAttribute = 101
+Object.getPrototypeOf(o1).prototypeAttribute = 100
+Object.getPrototypeOf(o2).prototypeAttribute = 101
 
 MyClass.staticAttribute = 102
 

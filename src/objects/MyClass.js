@@ -7,10 +7,10 @@ const MyClass = function (inputName) {
   let privateAttribute = 1
   this.publicAttribute = 2
 
-  // This attribute is inherited, but its value is not shared among instances.
-  MyClass.prototype.protectedAttribute = 99
-
   // This attribute is inherited and its value is shared among instances.
+  MyClass.prototype.prototypeAttribute = 99
+
+  // This attribute is not directly reachable through instances.
   MyClass.staticAttribute = 99
 
   this.getPrivateAttribute = function () {
@@ -28,7 +28,7 @@ const MyClass = function (inputName) {
     output += ' - '
     output += `Public attr.: ${this.publicAttribute}`
     output += ' - '
-    output += `Prototype attr.: ${MyClass.prototype.protectedAttribute}`
+    output += `Prototype attr.: ${MyClass.prototype.prototypeAttribute}`
     output += ' - '
     output += `Static attr.: ${MyClass.staticAttribute}`
     return output
