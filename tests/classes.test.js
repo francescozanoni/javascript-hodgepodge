@@ -2,15 +2,15 @@
 
 const MyClass = require('../src/classes/MyClass')
 
-describe('Classes', () => {
-  test('Instantiation', () => {
-    const o1 = new MyClass('o1')
+test('Instantiation', () => {
+  const o1 = new MyClass('o1')
 
-    expect(o1.toString())
-      .toBe('Name: o1 - Private attr.: 1 - Public attr.: 2 - Prototype attr.: 99 - Static attr.: 99')
-  })
+  expect(o1.toString())
+    .toBe('Name: o1 - Private attr.: 1 - Public attr.: 2 - Static attr.: 99 - Prototype attr.: 55')
+})
 
-  test('Set private and public attributes', () => {
+describe('Private and public attributes', () => {
+  test('Set and get', () => {
     const o1 = new MyClass('o1')
 
     o1.setPrivateAttribute(5)
@@ -20,15 +20,6 @@ describe('Classes', () => {
       .toBe(5)
     expect(o1.publicAttribute)
       .toBe(3)
-  })
-
-  test('Get private and public attributes', () => {
-    const o1 = new MyClass('o1')
-
-    expect(o1.getPrivateAttribute())
-      .toBe(1)
-    expect(o1.publicAttribute)
-      .toBe(2)
   })
 
   test('Cannot get private attributes directly', () => {
@@ -41,11 +32,13 @@ describe('Classes', () => {
   test('Cannot set private attributes directly', () => {
     const o1 = new MyClass('o1')
 
-    expect(() => { o1.privateAttribute = 5 })
+    expect(() => {
+      o1.privateAttribute = 5
+    })
       .toThrow(TypeError('Cannot add property privateAttribute, object is not extensible'))
   })
 
-  test('Set private and public attributes of sibling objects', () => {
+  test('Set with sibling objects', () => {
     const o1 = new MyClass('o1')
     const o2 = new MyClass('o2')
 
@@ -56,12 +49,14 @@ describe('Classes', () => {
     o2.publicAttribute = 42
 
     expect(o1.toString())
-      .toBe('Name: o1 - Private attr.: 31 - Public attr.: 32 - Prototype attr.: 99 - Static attr.: 99')
+      .toBe('Name: o1 - Private attr.: 31 - Public attr.: 32 - Static attr.: 99 - Prototype attr.: 55')
     expect(o2.toString())
-      .toBe('Name: o2 - Private attr.: 41 - Public attr.: 42 - Prototype attr.: 99 - Static attr.: 99')
+      .toBe('Name: o2 - Private attr.: 41 - Public attr.: 42 - Static attr.: 99 - Prototype attr.: 55')
   })
+})
 
-  test('Set and get prototype attribute of sibling objects', () => {
+describe('Prototype attributes', () => {
+  test('Set and get with sibling objects', () => {
     const o1 = new MyClass('o1')
     const o2 = new MyClass('o2')
 
@@ -69,24 +64,28 @@ describe('Classes', () => {
     Object.getPrototypeOf(o2).prototypeAttribute = 101
 
     expect(o1.toString())
-      .toBe('Name: o1 - Private attr.: 1 - Public attr.: 2 - Prototype attr.: 101 - Static attr.: 99')
+      .toBe('Name: o1 - Private attr.: 1 - Public attr.: 2 - Static attr.: 99 - Prototype attr.: 101')
     expect(o2.toString())
-      .toBe('Name: o2 - Private attr.: 1 - Public attr.: 2 - Prototype attr.: 101 - Static attr.: 99')
+      .toBe('Name: o2 - Private attr.: 1 - Public attr.: 2 - Static attr.: 99 - Prototype attr.: 101')
     expect(Object.getPrototypeOf(o1).prototypeAttribute)
       .toBe(Object.getPrototypeOf(o2).prototypeAttribute)
   })
+})
 
-  test('Cannot set and get static attribute through object', () => {
+describe('Static attributes', () => {
+  test('Cannot set and get through object', () => {
     const o1 = new MyClass('o1')
 
     expect(o1.staticAttribute)
       .toBe(undefined)
 
-    expect(() => { o1.staticAttribute = 5 })
+    expect(() => {
+      o1.staticAttribute = 5
+    })
       .toThrow(TypeError('Cannot add property staticAttribute, object is not extensible'))
   })
 
-  test('Set and get static attribute through class', () => {
+  test('Set and get through class', () => {
     expect(MyClass.staticAttribute)
       .toBe(99)
 

@@ -1,14 +1,16 @@
 'use strict'
 
+const MyPrototype = function () {
+  // This attribute is inherited and its value is shared among instances.
+  this.prototypeAttribute = 55
+}
+
 const MyClass = function (inputName) {
   // Private constant
   const name = inputName
 
   let privateAttribute = 1
   this.publicAttribute = 2
-
-  // This attribute is inherited and its value is shared among instances.
-  MyClass.prototype.prototypeAttribute = 99
 
   // This attribute is not directly reachable through instances.
   MyClass.staticAttribute = 99
@@ -28,13 +30,15 @@ const MyClass = function (inputName) {
     output += ' - '
     output += `Public attr.: ${this.publicAttribute}`
     output += ' - '
-    output += `Prototype attr.: ${MyClass.prototype.prototypeAttribute}`
-    output += ' - '
     output += `Static attr.: ${MyClass.staticAttribute}`
+    output += ' - '
+    output += `Prototype attr.: ${Object.getPrototypeOf(this).prototypeAttribute}`
     return output
   }
 
   Object.seal(this)
 }
+
+MyClass.prototype = new MyPrototype()
 
 module.exports = MyClass
