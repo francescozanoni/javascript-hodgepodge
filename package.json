@@ -9,6 +9,7 @@
   "author": "Francesco Zanoni <francescozanoni81@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "ajv": "^6.12.6",
     "fastify": "^3.6.0",
     "lodash": "^4.17.20",
     "node-fetch": "^2.6.0"

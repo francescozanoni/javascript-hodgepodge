@@ -11,6 +11,7 @@ Several basic examples and experiments with JavaScript.
  * `src/classes`: class/object management, with references to classic OOP concepts
  * `src/property-existence-check.js`: how to check for an object property existence
  * `src/error-within-async.js`: examples of error raised within async function
+ * `src/validation-with-json-schema.js`: data validation via [JSON schema](https://json-schema.org) with [Ajv](https://ajv.js.org) package
  * `tests/node-fetch.test.js`: HTTP request/response test with [node-fetch](https://www.npmjs.com/package/node-fetch) package
  * `tests/http-server-mock.test.js`: test client functionalities by mocking an HTTP server with [nock](https://github.com/nock/nock) package
  * `tests/error-within-async.test.js`: how to ensure unexpected errors raised within asynchronous code do not jeopardize tests performed by [Jest](https://jestjs.io) framework
