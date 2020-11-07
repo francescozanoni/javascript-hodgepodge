@@ -8,7 +8,6 @@ Several basic examples and experiments with JavaScript.
 
  * `src/fetch-ibans`: fetch many sample IBANs from several websites, in parallel with [node-fetch](https://www.npmjs.com/package/node-fetch) package and [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
  * `src/events`: NodeJS [event](https://nodejs.org/api/events.html) emitter and listener
- * `src/classes`: class/object management, with references to classic OOP concepts
  * `src/property-existence-check.js`: how to check for an object property existence
  * `src/error-within-async.js`: examples of error raised within async function
  * `src/validation-with-json-schema.js`: data validation via [JSON schema](https://json-schema.org) with [Ajv](https://ajv.js.org) package
