@@ -13,8 +13,9 @@ Several basic examples and experiments with JavaScript.
  * `src/validation-with-json-schema.js`: data validation via [JSON schema](https://json-schema.org) with [Ajv](https://ajv.js.org) package
  * `tests/node-fetch.test.js`: HTTP request/response test with [node-fetch](https://www.npmjs.com/package/node-fetch) package
  * `tests/http-server-mock.test.js`: test client functionalities by mocking an HTTP server with [nock](https://github.com/nock/nock) package
- * `tests/error-within-async.test.js`: how to ensure unexpected errors raised within asynchronous code do not jeopardize tests performed by [Jest](https://jestjs.io) framework
+ * `tests/error-within-async.test.js`: how to ensure unexpected errors raised within asynchronous code do not jeopardize tests performed by [Jest](https://jestjs.io) test framework
  * `tests/fastify.test.js`: test [Fastify](https://www.fastify.io)-based web application
+ * `tests/fs-mock.test.js`: how to mock an external module function with [Jest](https://jestjs.io) test framework
  * `.eslintrc.json`: configuration for [ESLint](https://eslint.org) package
 
 
@@ -27,6 +28,8 @@ Several basic examples and experiments with JavaScript.
 
  * in order to avoid warning `TypeError: this.cliEngine is not a constructor` within IDE, I've switched to [ESLint](https://eslint.org) 5
  * test files are suffixed by `.test.js`, in order to comply with [Jest](https://jestjs.io) default, so no further parameter is required
+ * package `@types/jest` has been installed in order to remove IDE warnings
+ * (this could seem advertising, I know) a **LOT** of examples can be found on book [JavaScript: The Definitive Guide, 7th Edition](https://www.oreilly.com/library/view/javascript-the-definitive/9781491952016), by [David Flanagan](https://davidflanagan.com)
 
 
 ----
