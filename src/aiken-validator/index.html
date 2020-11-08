@@ -18,12 +18,18 @@
         function (event) {
           var inputElement = document.getElementById('input')
           var outputElement = document.getElementById('output')
-          inputElement.onkeydown = function() { outputElement.innerHTML = ''; validateAll(inputElement, outputElement); }
-          inputElement.onkeyup = function() { outputElement.innerHTML = ''; validateAll(inputElement, outputElement); }
-          inputElement.onmousedown = function() { outputElement.innerHTML = ''; validateAll(inputElement, outputElement); }
-          inputElement.onmousemove = function() { outputElement.innerHTML = ''; validateAll(inputElement, outputElement); }
-          inputElement.onkeypress = function() { outputElement.innerHTML = ''; validateAll(inputElement, outputElement); }
-          inputElement.onchange = function() { outputElement.innerHTML = ''; validateAll(inputElement, outputElement); }
+
+          function actionAfterInput () {
+            outputElement.innerHTML = ''
+            validateAll(inputElement, outputElement)
+          }
+
+          inputElement.onkeydown = actionAfterInput
+          inputElement.onkeyup = actionAfterInput
+          inputElement.onmousedown = actionAfterInput
+          inputElement.onmousemove = actionAfterInput
+          inputElement.onkeypress = actionAfterInput
+          inputElement.onchange = actionAfterInput
         }
       )
     </script>

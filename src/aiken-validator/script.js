@@ -1,8 +1,6 @@
 /**
- * Client-side version.
- */
-
-/**
+ * Validate one question.
+ *
  * @param {string} question e.g. 'What is the correct answer to this question?
  *                                A.Is it this one?
  *                                B. Maybe this answer?
@@ -22,26 +20,28 @@ function validateOne (question) {
   var result = []
   var questionNumberSeparator = ''
   var questionNumbers = []
-  var questionAsStringArray = question.split('\n')
-  for (var i = 0; i < questionAsStringArray.length; i++) {
+  var questionLines = question.split('\n')
+
+  // Result structure is prepared.
+  for (var i = 0; i < questionLines.length; i++) {
     var o = {}
-    o[questionAsStringArray[i]] = false
+    o[questionLines[i]] = false
     result.push(o)
   }
 
-  // Question generic validation.
-  if (questionAsStringArray.length < 4) {
+  // Question generic validation: at least two answers must be provided.
+  if (questionLines.length < 4) {
     return result
   }
 
   // Question header (actual question) validation.
-  if (/^.[.\]] /.test(questionAsStringArray[0]) === false) {
-    result[0][questionAsStringArray[0]] = true
+  if (/^.[.\]] /.test(questionLines[0]) === false) {
+    result[0][questionLines[0]] = true
   }
 
   // Question answers validation.
-  for (var j = 1; j < questionAsStringArray.length - 1; j++) {
-    var answer = questionAsStringArray[j]
+  for (var j = 1; j < questionLines.length - 1; j++) {
+    var answer = questionLines[j]
     var answerNumber = answer.substr(0, 1)
     var answerNumberSeparator = answer.substr(1, 1)
     // Answer generic validation.
@@ -57,7 +57,7 @@ function validateOne (question) {
       continue
     }
     // Answer number validation: it must unique.
-    if (questionNumbers.indexOf(answerNumber) === -1) {
+    if (questionNumbers.includes(answerNumber) === false) {
       questionNumbers.push(answerNumber)
     } else {
       result[j][answer] = false
@@ -67,10 +67,10 @@ function validateOne (question) {
   // Question footer validation.
   if (
     // Generic structure validation.
-    /^ANSWER: [A-Z]$/.test(questionAsStringArray[questionAsStringArray.length - 1]) === true &&
+    /^ANSWER: [A-Z]$/.test(questionLines[questionLines.length - 1]) === true &&
     // Correct answer number validation.
-    questionNumbers.indexOf(questionAsStringArray[questionAsStringArray.length - 1].substr(-1)) !== -1) {
-    result[questionAsStringArray.length - 1][questionAsStringArray[questionAsStringArray.length - 1]] = true
+    questionNumbers.includes(questionLines[questionLines.length - 1].substr(-1)) === true) {
+    result[questionLines.length - 1][questionLines[questionLines.length - 1]] = true
   }
 
   return result
@@ -80,21 +80,21 @@ function validateOne (question) {
  * Validate all questions.
  *
  * @param {HTMLTextAreaElement} inputElement - HTML element containing questions
- * @param {HTMLDivElement} outputElement - HTML element reporting question validity
+ * @param {HTMLDivElement} outputElement - HTML element reporting questions validity
  */
 function validateAll (inputElement, outputElement) {
   var questions = inputElement.value.trim().replace(/\r?\n/g, '\n').split('\n\n')
 
   for (var question of questions) {
-    var result = validateOne(question)
+    var questionValidity = validateOne(question)
 
-    var isQuestionValid = result.every(function (item) {
+    var isQuestionValid = questionValidity.every(function (item) {
       return Object.values(item)[0] === true
     })
 
-    for (var k = 0; k < result.length; k++) {
-      var line = Object.keys(result[k])[0]
-      var isLineValid = Object.values(result[k])[0]
+    for (var lineValidity of questionValidity) {
+      var line = Object.entries(lineValidity)[0][0]
+      var isLineValid = Object.entries(lineValidity)[0][1]
 
       if (isQuestionValid === true) {
         outputElement.innerHTML += renderLineOfValidQuestion(line)
