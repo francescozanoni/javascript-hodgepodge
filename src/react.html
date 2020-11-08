@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+
+<div id="square"></div>
+<div id="another_square"></div>
+
+<script type="text/javascript">
+  var eventEmitter = new EventTarget()
+</script>
+
+<script type="text/babel">
+
+  class Square extends React.Component {
+    constructor (props) {
+      super(props)
+      this.state = {
+        text: 'DEFAULT',
+      }
+      eventEmitter.addEventListener(
+        'event',
+        function () {
+          this.setState({ text: 'DEF CLICKED!' })
+        }
+          .bind(this)
+      )
+    }
+
+    render () {
+      return (
+        <button>
+          {this.state.text} {this.props.text}
+        </button>
+      )
+    }
+  }
+
+  class AnotherSquare extends React.Component {
+    render () {
+      return (
+        <button onClick={() => eventEmitter.dispatchEvent(new Event('event'))}>
+          {this.props.text}
+        </button>
+      )
+    }
+  }
+
+  ReactDOM.render(
+    <Square text="ABC"/>,
+    document.getElementById('square')
+  )
+
+  ReactDOM.render(
+    <AnotherSquare text="DEF"/>,
+    document.getElementById('another_square')
+  )
+
+</script>
+
+</body>
+</html>
+
+<!-- https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html -->
+<!-- https://stackoverflow.com/questions/45831911/is-there-any-eventemitter-in-browser-side-that-has-similar-logic-in-nodejs -->

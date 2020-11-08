@@ -11,6 +11,7 @@ Several basic examples and experiments with JavaScript.
  * `src/property-existence-check.js`: how to check for an object property existence
  * `src/error-within-async.js`: examples of error raised within async function
  * `src/validation-with-json-schema.js`: data validation via [JSON schema](https://json-schema.org) with [Ajv](https://ajv.js.org) package
+ * `src/react.html`: [React JS](https://reactjs.org) with event-driven component communication
  * `.eslintrc.json`: configuration for [ESLint](https://eslint.org) package
 
 
