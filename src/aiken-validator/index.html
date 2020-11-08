@@ -11,7 +11,22 @@
 
     <link href="style.css" type="text/css" rel="stylesheet">
 
-    <script src="script.js" type="javascript"></script>
+    <script src="script.js" type="text/javascript"></script>
+    <script>
+      document.addEventListener(
+        'DOMContentLoaded',
+        function (event) {
+          var inputElement = document.getElementById('input')
+          var outputElement = document.getElementById('output')
+          inputElement.onkeydown = function() { outputElement.innerHTML = ''; validateAll(inputElement, outputElement); }
+          inputElement.onkeyup = function() { outputElement.innerHTML = ''; validateAll(inputElement, outputElement); }
+          inputElement.onmousedown = function() { outputElement.innerHTML = ''; validateAll(inputElement, outputElement); }
+          inputElement.onmousemove = function() { outputElement.innerHTML = ''; validateAll(inputElement, outputElement); }
+          inputElement.onkeypress = function() { outputElement.innerHTML = ''; validateAll(inputElement, outputElement); }
+          inputElement.onchange = function() { outputElement.innerHTML = ''; validateAll(inputElement, outputElement); }
+        }
+      )
+    </script>
 
 </head>
 

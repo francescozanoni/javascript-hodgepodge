@@ -2,6 +2,22 @@
  * Client-side version.
  */
 
+/**
+ * @param {string} question e.g. 'What is the correct answer to this question?
+ *                                A.Is it this one?
+ *                                B. Maybe this answer?
+ *                                C. Possibly this one?
+ *                                D. Must be this one!
+ *                                ANSWER: D'
+ * @returns {array<object>} e.g. [
+ *                                 { 'What is the correct answer to this question?': true },
+ *                                 { 'A.Is it this one?': false },
+ *                                 { 'B. Maybe this answer?': true },
+ *                                 { 'C. Possibly this one?': true },
+ *                                 { 'D. Must be this one!': true },
+ *                                 { 'ANSWER: D': true }
+ *                               ]
+ */
 function validateOne (question) {
   var result = []
   var questionNumberSeparator = ''
@@ -49,7 +65,8 @@ function validateOne (question) {
   }
 
   // Question footer validation.
-  if (// Generic structure validation.
+  if (
+    // Generic structure validation.
     /^ANSWER: [A-Z]$/.test(questionAsStringArray[questionAsStringArray.length - 1]) === true &&
     // Correct answer number validation.
     questionNumbers.indexOf(questionAsStringArray[questionAsStringArray.length - 1].substr(-1)) !== -1) {
@@ -59,37 +76,59 @@ function validateOne (question) {
   return result
 }
 
-function validateAll () {
-  document.getElementById('output').innerHTML = ''
-  var input = this.value.trim()
-  input = input.replace(/\r?\n/g, '\n')
-  var questions = input.split('\n\n')
+/**
+ * Validate all questions.
+ *
+ * @param {HTMLTextAreaElement} inputElement - HTML element containing questions
+ * @param {HTMLDivElement} outputElement - HTML element reporting question validity
+ */
+function validateAll (inputElement, outputElement) {
+  var questions = inputElement.value.trim().replace(/\r?\n/g, '\n').split('\n\n')
+
   for (var question of questions) {
     var result = validateOne(question)
-    var isValid = result.filter(function (item) {
+
+    var isQuestionValid = result.every(function (item) {
       return Object.values(item)[0] === true
-    }).length === result.length
+    })
+
     for (var k = 0; k < result.length; k++) {
-      if (isValid === true) {
-        document.getElementById('output').innerHTML += ('<pre style="color: #228B22">' + Object.keys(result[k])[0] + '</pre>')
-        continue
-      }
-      if (Object.values(result[k])[0] === true) {
-        document.getElementById('output').innerHTML += ('<pre>' + Object.keys(result[k])[0] + '</pre>')
+      var line = Object.keys(result[k])[0]
+      var isLineValid = Object.values(result[k])[0]
+
+      if (isQuestionValid === true) {
+        outputElement.innerHTML += renderLineOfValidQuestion(line)
+      } else if (isLineValid === true) {
+        outputElement.innerHTML += renderValidLineOfInvalidQuestion(line)
       } else {
-        document.getElementById('output').innerHTML += ('<pre style="color:red; font-weight: bold">' + Object.keys(result[k])[0] + '</pre>')
+        outputElement.innerHTML += renderInvalidLineOfInvalidQuestion(line)
       }
     }
-    document.getElementById('output').innerHTML += '<br />'
+
+    outputElement.innerHTML += '<br />'
   }
 }
 
-document.addEventListener('DOMContentLoaded', function (event) {
-  var textArea = document.getElementById('input')
-  textArea.onkeydown = validateAll
-  textArea.onkeyup = validateAll
-  textArea.onmousedown = validateAll
-  textArea.onmousemove = validateAll
-  textArea.onkeypress = validateAll
-  textArea.onchange = validateAll
-})
+/**
+ * @param {string} line
+ * @returns {string}
+ */
+function renderLineOfValidQuestion (line) {
+  return '<pre style="color: #228B22">' + line + '</pre>'
+}
+
+/**
+ * @param {string} line
+ * @returns {string}
+ */
+function renderValidLineOfInvalidQuestion (line) {
+  return '<pre>' + line + '</pre>'
+}
+
+/**
+ * @param {string} line
+ * @returns {string}
+ */
+function renderInvalidLineOfInvalidQuestion (line) {
+  return '<pre style="color:red; font-weight: bold">' + line + '</pre>'
+}
