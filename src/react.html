@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8"/>
     <title>Hello World</title>
     <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <!-- @see https://davidwalsh.name/blank-favicon -->
     <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAeaR9cIAAAAASUVORK5CYII="
           rel="icon" type="image/x-icon"/>
 </head>
@@ -43,7 +42,6 @@
   }
 
   class AnotherSquare extends React.Component {
-    // @see https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
     render () {
       // This component interacts with Square via event.
       const event = new CustomEvent('event', { detail: this.props.text })
@@ -70,5 +68,10 @@
 </body>
 </html>
 
-<!-- https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html -->
-<!-- https://stackoverflow.com/questions/45831911/is-there-any-eventemitter-in-browser-side-that-has-similar-logic-in-nodejs -->
+<!--
+References:
+ - https://davidwalsh.name/blank-favicon
+ - https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
+ - https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html
+ - https://stackoverflow.com/questions/45831911/is-there-any-eventemitter-in-browser-side-that-has-similar-logic-in-nodejs
+-->
