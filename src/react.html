@@ -6,28 +6,28 @@
     <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- @see https://davidwalsh.name/blank-favicon -->
+    <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAeaR9cIAAAAASUVORK5CYII="
+          rel="icon" type="image/x-icon"/>
 </head>
 <body>
 
 <div id="square"></div>
 <div id="another_square"></div>
 
-<script type="text/javascript">
-  var eventEmitter = new EventTarget()
-</script>
-
 <script type="text/babel">
 
   class Square extends React.Component {
     constructor (props) {
       super(props)
-      this.state = {
-        text: 'DEFAULT',
-      }
-      eventEmitter.addEventListener(
+      this.state = { text: this.props.text }
+    }
+
+    componentDidMount () {
+      window.addEventListener(
         'event',
-        function () {
-          this.setState({ text: 'DEF CLICKED!' })
+        function (event) {
+          this.setState({ text: event.detail + ' CLICKED!' })
         }
           .bind(this)
       )
@@ -36,16 +36,19 @@
     render () {
       return (
         <button>
-          {this.state.text} {this.props.text}
+          {this.state.text}
         </button>
       )
     }
   }
 
   class AnotherSquare extends React.Component {
+    // @see https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
     render () {
+      // This component interacts with Square via event.
+      const event = new CustomEvent('event', { detail: this.props.text })
       return (
-        <button onClick={() => eventEmitter.dispatchEvent(new Event('event'))}>
+        <button onClick={() => window.dispatchEvent(event)}>
           {this.props.text}
         </button>
       )
