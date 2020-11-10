@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Web browser custom events</title>
+    <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAeaR9cIAAAAASUVORK5CYII="
+          rel="icon" type="image/x-icon"/>
+</head>
+<body>
+
+<script>
+
+  window.addEventListener(
+    'a_custom_event',
+    function (customEvent) {
+      alert('Custom event triggered, with this data: ' + customEvent.detail)
+    }
+  )
+
+  window.addEventListener(
+    'a_standard_event',
+    function (standardEvent) {
+      alert('Standard event triggered')
+    }
+  )
+
+  window.addEventListener(
+    'another_standard_event',
+    function (standardEvent) {
+      alert('Another standard event triggered')
+    }
+  )
+
+</script>
+
+<button onClick="window.dispatchEvent(new CustomEvent('a_custom_event', { detail: 'DATA FROM CUSTOM EVENT' }))">
+    Click me to trigger a custom event
+</button>
+
+<br/>
+<br/>
+
+<button onClick="window.dispatchEvent(new Event('a_standard_event'))">
+    Click me to trigger a standard_event event
+</button>
+
+<br/>
+<br/>
+
+<button onClick="window.dispatchEvent(new Event('another_standard_event'))">
+    Click me to trigger a another_standard_event event
+</button>
+
+</body>
+</html>
+
+<!--
+References:
+ - https://davidwalsh.name/blank-favicon
+ - https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
+ - https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html
+ - https://stackoverflow.com/questions/45831911/is-there-any-eventemitter-in-browser-side-that-has-similar-logic-in-nodejs
+-->
