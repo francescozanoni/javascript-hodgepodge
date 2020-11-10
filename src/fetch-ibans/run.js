@@ -15,7 +15,7 @@ const ibanPattern = /[A-Z]{2} ?[0-9]{2} ?[A-Z0-9 ]{4,}/
 function fetchIbans (urls) {
   // Download all HTML pages.
   return Promise.all(urls.map(url => fetch(url)))
-  // Extract HTML from HTML pages.
+    // Extract HTML from HTML pages.
     .then(responses => Promise.all(responses.map(response => response.text()))
       // Extract raw IBANs from HTML pages: one IBAN array per page.
       .then(bodies => bodies.map(body => body.match(new RegExp(ibanPattern, 'g'))))
@@ -27,8 +27,6 @@ function fetchIbans (urls) {
     .catch(error => console.error(error))
 }
 
-(async function () {
-  fetchIbans(urls)
-    .then(ibans => console.log(ibans))
-    .catch(error => console.error(error))
-})()
+fetchIbans(urls)
+  .then(ibans => console.log(ibans))
+  .catch(error => console.error(error))
