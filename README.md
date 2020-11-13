@@ -13,6 +13,7 @@ Several basic examples and experiments with JavaScript.
  * `src/error-within-async.js`: examples of error raised within async function
  * `src/validation-with-json-schema.js`: data validation via [JSON schema](https://json-schema.org) with [Ajv](https://ajv.js.org) package
  * `src/react.html`: [React JS](https://reactjs.org) with event-driven component communication
+ * `src/react`: another basic example with [React JS](https://reactjs.org)
  * `.eslintrc.json`: configuration for [ESLint](https://eslint.org) package
 
 
