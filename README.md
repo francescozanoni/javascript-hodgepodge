@@ -15,6 +15,7 @@ Several basic examples and experiments with JavaScript.
  * `src/react.html`: [React JS](https://reactjs.org) with event-driven component communication
  * `src/react`: another basic example with [React JS](https://reactjs.org)
  * `.eslintrc.json`: configuration for [ESLint](https://eslint.org) package
+ * `babel.config.json`: configuration file for [Babel](https://babeljs.io), customized for [React JS](https://reactjs.org) and very old browsers on Apple [iOS](https://www.apple.com/ios) 9.3
 
 
 ### Test examples
@@ -47,6 +48,11 @@ Several basic examples and experiments with JavaScript.
 ### Code linting
 
     docker run -v ${PWD}:/code -w /code --rm node:alpine yarn lint
+
+
+### Code transpilation
+
+    docker run -v ${PWD}:/root -w /root --rm node:alpine npx babel /root/src/react/script.js
 
 
 
