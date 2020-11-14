@@ -6,7 +6,8 @@
 //              -w /root \
 //              --rm \
 //              node:alpine \
-//              npx babel /root/src/react/script.js
+//              npx babel /root/src/react/script.js  -o /root/src/react/script.transpiled.js
+
 //
 // and the output was copied and pasted to this file.
 //

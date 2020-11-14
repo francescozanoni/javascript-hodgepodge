@@ -52,7 +52,7 @@ Several basic examples and experiments with JavaScript.
 
 ### Code transpilation
 
-    docker run -v ${PWD}:/root -w /root --rm node:alpine npx babel /root/src/react/script.js
+    docker run -v ${PWD}:/root -w /root --rm node:alpine npx babel /root/src/react/script.js -o /root/src/react/script.transpiled.js
 
 
 
