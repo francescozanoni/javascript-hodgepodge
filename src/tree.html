@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Basic tree rendering example with Treant</title>
+
+    <!-- Files extracted from https://github.com/fperucic/treant-js/archive/master.zip -->
+    <script src="raphael.js"></script>
+    <script src="Treant.js"></script>
+    <link rel="stylesheet" href="Treant.css">
+
+    <style>
+        .node-box {
+            padding: 0.5em;
+            border: 1px solid #000;
+            width: 200px;
+        }
+        .node-name {
+            font-weight: bold;
+        }
+    </style>
+    <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAeaR9cIAAAAASUVORK5CYII="
+          rel="icon" type="image/x-icon"/>
+</head>
+<body>
+<div id="chart-container"></div>
+
+<script>
+  var chart_config = {
+    chart: {
+      container: '#chart-container',
+      connectors: {
+        type: 'step'
+      },
+      rootOrientation: 'WEST',
+      node: {
+        HTMLclass: 'node-box'
+      }
+    },
+    nodeStructure: {
+      text: {
+        name: 'Mark Hill',
+        title: 'Chief executive officer'
+      },
+      children: [
+        {
+          text: {
+            name: 'Joe Linux',
+            title: 'Chief Technology Officer',
+          },
+          children: [
+            {
+              text: {
+                name: 'Ron Blomquist',
+                title: 'Chief Information Security Officer'
+              }
+            }
+          ]
+        },
+        {
+          text: {
+            name: 'Linda May',
+            title: 'Chief Business Officer',
+          },
+          children: [
+            {
+              text: {
+                name: 'Alice Lopez',
+                title: 'Chief Communications Officer'
+              }
+            }
+          ]
+        },
+        {
+          text: {
+            name: 'John Green',
+            title: 'Chief accounting officer'
+          }
+        }
+      ]
+    }
+  }
+  new Treant(chart_config);
+</script>
+
+</body>
+</html>
