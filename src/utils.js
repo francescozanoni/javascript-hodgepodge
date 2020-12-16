@@ -21,6 +21,25 @@ function onlyUnique (item, index, array) {
   return arrayOfJsonizedItems.indexOf(jsonizedItem) === index
 }
 
+/**
+ * Get current date/time in YYYY-MM-DD HH:MM:SS format.
+ *
+ * @returns {string} e.g. 2020-12-16 13:47:40
+ *
+ * @see https://usefulangle.com/post/187/nodejs-get-date-time
+ */
+function getDateTime () {
+  const date_ob = new Date()
+  const date = ('0' + date_ob.getDate()).slice(-2)
+  const month = ('0' + (date_ob.getMonth() + 1)).slice(-2)
+  const year = date_ob.getFullYear()
+  const hours = ('0' + date_ob.getHours()).slice(-2)
+  const minutes = ('0' + date_ob.getMinutes()).slice(-2)
+  const seconds = ('0' + date_ob.getSeconds()).slice(-2)
+  return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
+}
+
 module.exports = {
-  onlyUnique: onlyUnique
+  onlyUnique,
+  getDateTime
 }
