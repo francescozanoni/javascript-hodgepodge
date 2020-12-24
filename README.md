@@ -27,6 +27,7 @@ Several basic examples and experiments with JavaScript.
  * `tests/error-within-async.test.js`: ensure unexpected errors raised within asynchronous code do not jeopardize tests performed by [Jest](https://jestjs.io) framework
  * `tests/fastify.test.js`: test [Fastify](https://www.fastify.io)-based web application
  * `tests/fs-mock.test.js`: mock external module functions with [Jest](https://jestjs.io) framework
+ * `tests/openapi-validator.test.js`: validate API response against OpenAPI schema
 
 
 ### Experiments
