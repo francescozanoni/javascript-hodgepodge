@@ -17,14 +17,14 @@
  *                               ]
  */
 function validateOne (question) {
-  var result = []
-  var questionNumberSeparator = ''
-  var questionNumbers = []
-  var questionLines = question.split('\n')
+  const result = []
+  let questionNumberSeparator = ''
+  const questionNumbers = []
+  const questionLines = question.split('\n')
 
   // Result structure is prepared.
-  for (var i = 0; i < questionLines.length; i++) {
-    var o = {}
+  for (let i = 0; i < questionLines.length; i++) {
+    const o = {}
     o[questionLines[i]] = false
     result.push(o)
   }
@@ -40,10 +40,10 @@ function validateOne (question) {
   }
 
   // Question answers validation.
-  for (var j = 1; j < questionLines.length - 1; j++) {
-    var answer = questionLines[j]
-    var answerNumber = answer.substr(0, 1)
-    var answerNumberSeparator = answer.substr(1, 1)
+  for (let j = 1; j < questionLines.length - 1; j++) {
+    const answer = questionLines[j]
+    const answerNumber = answer.substr(0, 1)
+    const answerNumberSeparator = answer.substr(1, 1)
     // Answer generic validation.
     if (/^[A-Z](.|\)) .+/.test(answer) === true) {
       result[j][answer] = true
@@ -83,18 +83,18 @@ function validateOne (question) {
  * @param {HTMLDivElement} outputElement - HTML element reporting questions validity
  */
 function validateAll (inputElement, outputElement) {
-  var questions = inputElement.value.trim().replace(/\r?\n/g, '\n').split('\n\n')
+  const questions = inputElement.value.trim().replace(/\r?\n/g, '\n').split('\n\n')
 
-  for (var question of questions) {
-    var questionValidity = validateOne(question)
+  for (const question of questions) {
+    const questionValidity = validateOne(question)
 
-    var isQuestionValid = questionValidity.every(function (item) {
+    const isQuestionValid = questionValidity.every(function (item) {
       return Object.values(item)[0] === true
     })
 
-    for (var lineValidity of questionValidity) {
-      var line = Object.entries(lineValidity)[0][0]
-      var isLineValid = Object.entries(lineValidity)[0][1]
+    for (const lineValidity of questionValidity) {
+      const line = Object.entries(lineValidity)[0][0]
+      const isLineValid = Object.entries(lineValidity)[0][1]
 
       if (isQuestionValid === true) {
         outputElement.innerHTML += renderLineOfValidQuestion(line)

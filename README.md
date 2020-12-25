@@ -17,7 +17,6 @@ Several basic examples and experiments with JavaScript.
  * `src/tree.html`: tree rendering example with [Treant.js](http://fperucic.github.io/treant-js) package
  * `src/streams`: examples with Node's [streams](https://nodejs.org/api/stream.html)
  * `.eslintrc.json`: configuration for [ESLint](https://eslint.org) package
- * `babel.config.json`: configuration file for [Babel](https://babeljs.io), customized for [React JS](https://reactjs.org) and very old browsers on Apple [iOS](https://www.apple.com/ios) 9.3
 
 
 ### Test examples
@@ -27,7 +26,7 @@ Several basic examples and experiments with JavaScript.
  * `tests/error-within-async.test.js`: ensure unexpected errors raised within asynchronous code do not jeopardize tests performed by [Jest](https://jestjs.io) framework
  * `tests/fastify.test.js`: test [Fastify](https://www.fastify.io)-based web application
  * `tests/fs-mock.test.js`: mock external module functions with [Jest](https://jestjs.io) framework
- * `tests/openapi-validator.test.js`: validate API response against OpenAPI schema
+ * `tests/openapi-validator.test.js`: validate API response against [OpenAPI](https://swagger.io/specification) schema with [jest-openapi](https://github.com/openapi-library/OpenAPIValidators/tree/master/packages/jest-openapi) package
 
 
 ### Experiments
@@ -53,18 +52,11 @@ Several basic examples and experiments with JavaScript.
     docker run -v ${PWD}:/code -w /code --rm node:alpine yarn lint
 
 
-### Code transpilation
-
-    docker run -v ${PWD}:/root -w /root --rm node:alpine npx babel /root/src/react/script.js -o /root/src/react/script.transpiled.js
-
-
-
 ----
 
 
 ### Notes
 
- * in order to avoid warning `TypeError: this.cliEngine is not a constructor` within IDE, I've switched to [ESLint](https://eslint.org) 5, as suggested [here](https://intellij-support.jetbrains.com/hc/en-us/community/posts/360004195120-TypeError-this-cliEngine-is-not-a-constructor)
  * test files are suffixed by `.test.js`, in order to comply with [Jest](https://jestjs.io) default, so no further parameter is required
  * in order to avoid warning `Unresolved function/method/variable` within IDE, I've added `@types/jest` package, as suggested [here](https://intellij-support.jetbrains.com/hc/en-us/community/posts/115000357324-Get-rid-of-Unresolved-function-method-variable-warning-in-Jest-test-files)
  * (this could seem advertising, I know) a **LOT** of examples can be found on book [JavaScript: The Definitive Guide (7th ed.)](https://www.oreilly.com/library/view/javascript-the-definitive/9781491952016), by [David Flanagan](https://davidflanagan.com)

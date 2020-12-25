@@ -29,13 +29,13 @@ function onlyUnique (item, index, array) {
  * @see https://usefulangle.com/post/187/nodejs-get-date-time
  */
 function getDateTime () {
-  const date_ob = new Date()
-  const date = ('0' + date_ob.getDate()).slice(-2)
-  const month = ('0' + (date_ob.getMonth() + 1)).slice(-2)
-  const year = date_ob.getFullYear()
-  const hours = ('0' + date_ob.getHours()).slice(-2)
-  const minutes = ('0' + date_ob.getMinutes()).slice(-2)
-  const seconds = ('0' + date_ob.getSeconds()).slice(-2)
+  const dateObject = new Date()
+  const date = ('0' + dateObject.getDate()).slice(-2)
+  const month = ('0' + (dateObject.getMonth() + 1)).slice(-2)
+  const year = dateObject.getFullYear()
+  const hours = ('0' + dateObject.getHours()).slice(-2)
+  const minutes = ('0' + dateObject.getMinutes()).slice(-2)
+  const seconds = ('0' + dateObject.getSeconds()).slice(-2)
   return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
 }
 
