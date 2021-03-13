@@ -50,7 +50,13 @@ test('Test response against OpenAPI schema', async () => {
     .get('/endpoint')
     .reply(200, '{"a":"a","b":1}')
 
-  const response = await axios.get('http://hostname/endpoint')
+  let response
+  try {
+    response = await axios.get('http://hostname/endpoint')
+  } catch (error) {
+    // Error is thrown if HTTP response code is not 200.
+    response = error.response
+  }
 
   expect(response.status).toEqual(200)
 
