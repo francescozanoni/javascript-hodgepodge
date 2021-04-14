@@ -1,49 +1,14 @@
 // node-fetch is not supported by jest-openapi.
 const axios = require('axios')
 const nock = require('nock')
+const path = require('path')
 
 // This is required to make nock correctly intercept axios requests.
 // https://github.com/axios/axios/issues/305
 axios.defaults.adapter = require('axios/lib/adapters/http')
 
 const jestOpenAPI = require('jest-openapi')
-jestOpenAPI({
-  openapi: '3.0.0',
-  info: {
-    title: 'Example API',
-    version: '1.0.0'
-  },
-  paths: {
-    '/endpoint': {
-      get: {
-        responses: {
-          200: {
-            description: 'Response body should be an object with fields a and b',
-            content: {
-              'application/json': {
-                schema: {
-                  type: 'object',
-                  required: [
-                    'a',
-                    'b'
-                  ],
-                  properties: {
-                    a: {
-                      type: 'string'
-                    },
-                    b: {
-                      type: 'integer'
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-})
+jestOpenAPI(path.join(__dirname, '/openapi.yaml')) // path.join() is recommended by ESLint
 
 test('Test response against OpenAPI schema', async () => {
   nock('http://hostname')
