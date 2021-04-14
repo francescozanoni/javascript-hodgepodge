@@ -6,13 +6,14 @@ const nock = require('nock')
 // https://github.com/axios/axios/issues/305
 axios.defaults.adapter = require('axios/lib/adapters/http')
 
+// Mock HTTP server.
+nock('http://hostname')
+  .persist() // --> this is required when the endpoint is invoked more than once.
+  .get('/path')
+  .reply(200, 'text to return')
+
 describe('Mock HTTP server', () => {
   test('node-fetch client', async () => {
-  // Mock HTTP server
-    nock('http://hostname')
-      .get('/path')
-      .reply(200, 'text to return')
-
     // Request to HTTP server
     const response = await fetch('http://hostname/path')
 
@@ -23,11 +24,6 @@ describe('Mock HTTP server', () => {
   })
 
   test('axios client', async () => {
-  // Mock HTTP server
-    nock('http://hostname')
-      .get('/path')
-      .reply(200, 'text to return')
-
     // Request to HTTP server
     const response = await axios.get('http://hostname/path')
 
