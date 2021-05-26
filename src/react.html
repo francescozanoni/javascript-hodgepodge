@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>Hello World</title>
+    <title>React components and events</title>
     <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -11,11 +11,21 @@
 </head>
 <body>
 
+<h1>Example of components interacting via events</h1>
+
+Component listening to 'my_event' events:
 <div id="square"></div>
+
+<br /><br />
+
+Component triggering 'my_event' events:
 <div id="another_square"></div>
 
 <script type="text/babel">
 
+  /**
+   * This component listens to 'my_event' events.
+   */
   class Square extends React.Component {
     constructor (props) {
       super(props)
@@ -24,7 +34,7 @@
 
     componentDidMount () {
       window.addEventListener(
-        'event',
+        'my_event',
         function (event) {
           this.setState({ text: event.detail + ' CLICKED!' })
         }
@@ -41,10 +51,12 @@
     }
   }
 
+  /**
+   * This component triggers 'my_event' events.
+   */
   class AnotherSquare extends React.Component {
     render () {
-      // This component interacts with Square via event.
-      const event = new CustomEvent('event', { detail: this.props.text })
+      const event = new CustomEvent('my_event', { detail: this.props.text })
       return (
         <button onClick={() => window.dispatchEvent(event)}>
           {this.props.text}
