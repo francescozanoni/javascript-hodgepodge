@@ -3,7 +3,6 @@
 const ajv = new (require('ajv'))({ allErrors: true })
 
 const schema = {
-  $id: 'http://example.com/schemas/schema.json',
   type: 'object',
   properties: {
     foo: {
