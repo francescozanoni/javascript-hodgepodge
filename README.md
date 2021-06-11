@@ -13,6 +13,7 @@ Several basic examples and experiments with JavaScript.
  * `src/browser-events.html`: web browser custom [event](https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events) management
  * `src/error-within-async.js`: examples of error raised within async function
  * `src/property-existence-check.js`: how to check for existence of an object property
+ * `src/read-text-file-lines.js`: read specific lines from text file with OS tools
  * `src/tree.html`: tree rendering example with [Treant.js](http://fperucic.github.io/treant-js) package
  * `src/utils.html`: few utility functions
  * `src/validation-with-json-schema.js`: data validation via [JSON schema](https://json-schema.org) with [Ajv](https://ajv.js.org) package
