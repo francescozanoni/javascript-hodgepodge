@@ -1,12 +1,13 @@
-const { exec } = require('child_process')
+const {
+  exec,
+  execSync
+} = require('child_process')
 
 const filePath = './tree.html'
 const firstLineIndex = 10
 const lastLineIndex = 19
 const offset = firstLineIndex - 1
 const limit = lastLineIndex - firstLineIndex + 1
-
-// @todo add sed/powershell availability check
 
 /**
  * @param {Error} error
@@ -25,15 +26,22 @@ function callback (error, stdout, stderr) {
   console.log(`stdout: ${stdout}`)
 }
 
-if (process.platform.startsWith('win') === true) {
-  exec(
-    'Get-Content ' + filePath + ' | Select-Object -Skip ' + offset + ' -First ' + limit,
-    { shell: 'powershell.exe' },
-    callback
-  )
+if (process.platform.startsWith('win')) {
+  if (execSync('where powershell').toString().trim().endsWith('powershell.exe')) {
+    exec(
+      'Get-Content ' + filePath + ' | Select-Object -Skip ' + offset + ' -First ' + limit,
+      { shell: 'powershell.exe' },
+      callback
+    )
+  } else {
+    exec(
+      'read-lines.bat ' + filePath + ' ' + firstLineIndex + ' ' + lastLineIndex,
+      callback
+    )
+  }
 } else {
   exec(
-    'sed -n "' + firstLineIndex + ',' + lastLineIndex + '"p ' + filePath,
+    'head -n ' + lastLineIndex + ' ' + filePath + ' | tail -n ' + firstLineIndex,
     callback
   )
 }
