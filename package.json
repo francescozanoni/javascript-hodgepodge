@@ -13,7 +13,8 @@
     "axios": "^0.21.1",
     "fastify": "^3.6.0",
     "lodash": "^4.17.20",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "openapi-validator": "^0.13.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.15",
