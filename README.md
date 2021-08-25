@@ -7,6 +7,7 @@ Several basic examples and experiments with JavaScript.
 ### Examples
 
  * `src/fetch-ibans`: fetch many sample IBANs from several websites, in parallel with [node-fetch](https://www.npmjs.com/package/node-fetch) package and [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+ * `src/headless-browser`: use a headless browser (e.g. [Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome)) to surf the web
  * `src/node-events`: NodeJS custom [event](https://nodejs.org/api/events.html) management
  * `src/react`: [React JS](https://reactjs.org) usage with event-driven component communication
  * `src/streams`: examples with Node's [streams](https://nodejs.org/api/stream.html)
