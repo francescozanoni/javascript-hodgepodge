@@ -9,6 +9,7 @@
   "author": "Francesco Zanoni <francescozanoni81@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "^9.0.9",
     "ajv": "^7.0.2",
     "axios": "^0.21.1",
     "fastify": "^3.6.0",
